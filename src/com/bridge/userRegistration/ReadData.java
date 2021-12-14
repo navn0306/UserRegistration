@@ -36,4 +36,20 @@ public class ReadData {
             System.out.println("Invalid lName");
         }
     }
+
+    public static void email() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter lName");
+        String email = sc.nextLine();
+        String regex = "^[abc.]*[a-zA-Z0-9]@[@]@[bl.]*[a-z.]{2}";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        if (matcher.matches()) {
+            System.out.println("Valid Email");
+        } else {
+            System.out.println("Invalid Email");
+        }
+    }
 }
