@@ -8,6 +8,7 @@ public class UserRegistration {
         ReadData.lName();
         ReadData.email();
         ReadData.mobile();
+        ReadData.password();
 
     }
 }

@@ -68,4 +68,20 @@ public class ReadData {
             System.out.println("Invalid Mobile Number");
         }
     }
+
+    public static void password() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Password");
+        String password = sc.nextLine();
+        String regex = "[a-zA-z0-9!@#$%^&*()?]{8}";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+
+        if (matcher.matches()) {
+            System.out.println("Valid Password");
+        } else {
+            System.out.println("Invalid Password");
+        }
+    }
 }
