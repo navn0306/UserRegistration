@@ -39,9 +39,9 @@ public class ReadData {
 
     public static void email() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter lName");
+        System.out.println("Enter Email");
         String email = sc.nextLine();
-        String regex = "^[abc.]*[a-zA-Z0-9]@[@]@[bl.]*[a-z.]{2}";
+        String regex = "^[abc.]*[a-zA-Z0-9]@[@][bl.]*[a-z.]{2}";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -50,6 +50,22 @@ public class ReadData {
             System.out.println("Valid Email");
         } else {
             System.out.println("Invalid Email");
+        }
+    }
+
+    public static void mobile() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Mobile Number");
+        String mobile = sc.nextLine();
+        String regex = "^(91[ ])?[6-9]\\d{9}$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mobile);
+
+        if (matcher.matches()) {
+            System.out.println("Valid Mobile Number");
+        } else {
+            System.out.println("Invalid Mobile Number");
         }
     }
 }

@@ -7,6 +7,7 @@ public class UserRegistration {
         ReadData.fName();
         ReadData.lName();
         ReadData.email();
+        ReadData.mobile();
 
     }
 }
