@@ -24,11 +24,11 @@ public class ReadData {
     public static void lName() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter lName");
-        String fName = sc.nextLine();
+        String lName = sc.nextLine();
         String regex = "^[A-Z][a-zA-Z]{2,}";
 
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(fName);
+        Matcher matcher = pattern.matcher(lName);
 
         if (matcher.matches()) {
             System.out.println("Valid lName");
