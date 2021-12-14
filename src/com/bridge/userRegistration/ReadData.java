@@ -73,7 +73,7 @@ public class ReadData {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Password");
         String password = sc.nextLine();
-        String regex = "[a-zA-z0-9!@#$%^&*()?]{8}";
+        String regex = "(?=.*[A-Z])[a-zA-Z0-9@#$%^&*()]{8,}$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
