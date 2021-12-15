@@ -10,7 +10,7 @@ public class ReadData {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter FName");
         String fName = sc.nextLine();
-         String regex = "^[A-Z][a-zA-Z]{2,}";
+        String regex = "^[A-Z][a-zA-Z]{2,}$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(fName);
@@ -21,11 +21,12 @@ public class ReadData {
             System.out.println("Invalid FName");
         }
     }
+
     public static void lName() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter lName");
         String lName = sc.nextLine();
-        String regex = "^[A-Z][a-zA-Z]{2,}";
+        String regex = "^[A-Z][a-zA-Z]{2,}$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(lName);
@@ -41,7 +42,7 @@ public class ReadData {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Email");
         String email = sc.nextLine();
-        String regex = "^[abc.]*[a-zA-Z0-9]@[@][bl.]*[a-z.]{2}";
+        String regex = "^[a-z0-9]{3,20}([_.+-][a-z0-9]+)?@[a-z0-9]+.[a-z]{2,3}(.[a-z]{2})?$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -73,7 +74,7 @@ public class ReadData {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Password");
         String password = sc.nextLine();
-        String regex = "(?=.*\\d)(?=.*[A-Z])[a-zA-Z0-9@#$%^&*()]{8,}$";
+        String regex = "(?=.*[A-Z])[@#$%]";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
