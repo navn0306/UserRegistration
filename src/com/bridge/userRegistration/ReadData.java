@@ -41,7 +41,7 @@ public class ReadData {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter lName");
         String email = sc.nextLine();
-        String regex = "^[abc.]*[a-zA-Z0-9]@[@]@[bl.]*[a-z.]{2}";
+        String regex = "^[a-z0-9]{3,20}([_.+-][a-z0-9]+)?@[a-z0-9]+.[a-z]{2,3}(.[a-z]{2})?$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
