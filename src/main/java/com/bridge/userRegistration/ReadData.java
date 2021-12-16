@@ -60,7 +60,7 @@ public class ReadData {
 
     public static String password(String password) {
 
-        String regex = "(?=.*[A-Z])([@#$%])$";
+        String regex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()]{1})(?=\\\\S+$).{8,20}$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
