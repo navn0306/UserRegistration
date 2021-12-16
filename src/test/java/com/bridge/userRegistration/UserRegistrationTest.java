@@ -189,7 +189,7 @@ public class UserRegistrationTest {
     public void givenPasswordWithoutALowerCaseShouldReturnFalse() {
 
         ReadData readData = new ReadData();
-        String actualResult = readData.password("AAAAAAA@123");
+        String actualResult = readData.password("AAAAAA@123A");
         String expectedRes = "Not Valid";
         Assert.assertEquals(actualResult, expectedRes);
     }
