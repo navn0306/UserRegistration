@@ -1,8 +1,7 @@
 package com.bridge.userRegistration;
 
-import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -12,41 +11,33 @@ import java.util.Collection;
 
 @RunWith(Parameterized.class)
 public class UserRegistrationParameterizedTest {
-    private String actualResult;
-    private String expectedResult;
-    private ReadData read;
+    public String emailId;
+    public boolean expectedResult;
 
-    //Constructor
-    public UserRegistrationParameterizedTest(String actualResult, String expectedResult) {
-
-        this.actualResult = actualResult;
+    public UserRegistrationParameterizedTest(String emailId, boolean expectedResult) {
+        this.emailId = emailId;
         this.expectedResult = expectedResult;
     }
 
-    @Before
-    public void init() {
-        read = new ReadData();
-    }
-
     @Parameterized.Parameters
-    public static Collection emailInput() {
-        return Arrays.asList(new Object[][]{{"navneet@@yahoo.com", "Not Valid"}, {"abc.xyz@bl.co.india", "Not Valid"},
-                {"abc.xyz$bl.co.in", "Not Valid"}, {"abc.xyz@bl.co.in", "Valid Email"}});
-    }
+    public static Collection ExpectedResult() {
+        return Arrays.asList(new Object[][]{
+                {"abc.xyz@blz.com.in", true},
+                {"abc.xyz@blzin.com", true},
+                {"abc@blz.com", true},
+                {"abc@xyz@gmail.com", false},
+                {"abc@gmail.com", true},
+                {"abc", false},
+                {"abc@blz", false},
 
-    @Parameterized.Parameters
-    public static Collection passwordInput() {
-        return Arrays.asList(new Object[][]{{"Abccc@123", "Not Valid"}, {"abccc@@@123", "Not Valid"},
-                {"Ac@123", "Not Valid"}, {"AAAAAA@123A", "Not Valid"}});
+        });
     }
 
     @Test
-    public void testEmail() {
-        assertEquals(expectedResult, read.email(actualResult));
-    }
-
-    @Test
-    public void testPassword() {
-        assertEquals(expectedResult, read.password(actualResult));
+    public void givenEmailId_WithEmailId_ShouldPassedAllTest() throws UserRegistrationException {
+        UserRegistration validator = new UserRegistration();
+        String actualResult = validator.validateEmailID(this.emailId);
+        String expectedResult = "valid";
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }

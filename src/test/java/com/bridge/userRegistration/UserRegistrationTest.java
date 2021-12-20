@@ -3,221 +3,215 @@ package com.bridge.userRegistration;
 import org.junit.Assert;
 import org.junit.Test;
 
+
 public class UserRegistrationTest {
 
     @Test
-    public void givenTextWhenItContainsFirstCapsInFnameAndMinThreeAlphabetsShouldReturnTrue() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.fName("Aman");
-        String expectedResult = "Valid FName";
-        Assert.assertEquals(actualResult, expectedResult);
+    public void whenGivenFirstName_ShouldHaveMinimum3CharWithCamelCase() throws UserRegistrationException {
+        UserRegistration validator = new UserRegistration();
+        String firstName = validator.validateFirstName("Abc");
+        Assert.assertEquals("valid", firstName);
     }
 
+    // User Register Fast Name is Invalid
     @Test
-    public void givenTextWhenItDoesNotContainsFirstCapsInFnameShouldReturnTrue() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.fName("aman");
-        String expectedResult = "Not Valid";
-        Assert.assertEquals(actualResult, expectedResult);
+    public void whenGivenFirstName_WithInvalidFName() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateFirstName("bcdd");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid FName", userRegistrationException.message);
+        }
     }
 
-    @Test
-    public void givenTextWhenItContainsFirstCapsInFnameButNotMinThreeCharShouldReturnTrue() {
 
-        ReadData readData = new ReadData();
-        String actualResult = readData.fName("am");
-        String expectedResult = "Not Valid";
-        Assert.assertEquals(actualResult, expectedResult);
+    @Test
+    public void whenGivenFirstName_WithEmptyValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateFirstName(" ");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid FName", userRegistrationException.message);
+        }
     }
 
+    // User Register Fast Name is Null
     @Test
-    public void givenWhenItContainsFirstCapsInLnameAndMinThreeAlphabetsShouldReturnTrue() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.lName("Kumar");
-        String expectedRes = "Valid LName";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenFirstName_WithNullValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateFirstName(null);
+        } catch (NullPointerException nullPointerException) {
+            Assert.assertNotEquals("valid", nullPointerException.getMessage());
+        }
     }
 
-    @Test
-    public void givenTextWhenItDoesNotContainsFirstCapsInlnameShouldReturnTrue() {
 
-        ReadData readData = new ReadData();
-        String actualResult = readData.lName("kumar");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    // User Register Last Name is valid
+    @Test
+    public void whenGivenLastName_ShouldHaveMinimum3CharWithCamelCase() throws UserRegistrationException {
+        UserRegistration validator = new UserRegistration();
+        String lastName = validator.validateLastName("Gautam");
+        Assert.assertEquals("valid", lastName);
     }
 
+    // User register Last Name is Invalid
     @Test
-    public void givenTextWhenItContainsFirstCapsInlnameButNotMinThreeCharShouldReturnTrue() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.lName("ku");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenLastName_WithSmallLetter() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateLastName("Gautam");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter a valid lName", userRegistrationException.message);
+        }
     }
 
+    //  User Register Last Name in case  Empty
     @Test
-    public void givenEmailWhenDoesNotContainsAtTheRateShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("kuabc.yahoo.com");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenLastName_WithEmptyValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateLastName("");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter lName", userRegistrationException.message);
+        }
     }
 
+    //User Register Last Name in case  Null
     @Test
-    public void givenEmailWhenDoesNotContainsabcShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("xyz.yahoo.co.in");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenLastName_WithNullValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateLastName(null);
+        } catch (NullPointerException nullPointerException) {
+            Assert.assertNotEquals("valid", nullPointerException.getMessage());
+        }
     }
 
-    @Test
-    public void givenEmailWhenItContainsMoreThanThreeCharAtLastShouldReturnFalse() {
 
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("xyz.yahoo.co.india");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    // User Register Email-id is  valid
+    @Test
+    public void whenGivenEmail_Valid() throws UserRegistrationException {
+        UserRegistration validator = new UserRegistration();
+        String Email = validator.validateEmailID("abc.xyz@blz.com");
+        Assert.assertEquals("valid", Email);
     }
 
+    //  User Register Email-id is Invalid
     @Test
-    public void givenEmailWhenItContainsMoreThanTwoTLDShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("xyz.yahoo.co.in.co");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenEmail_WithoutSignShouldReturnInvalid() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateEmailID("abc.xyz.bl.co.in");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid Email", userRegistrationException.message);
+        }
     }
 
+    // User Register Email-id in case of Empty value
     @Test
-    public void givenEmailWhenItContainsOneCharInTLDShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("xyz.yahoo.co.i");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenEmail_WithoutSignShouldReturnEmptyValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateEmailID("");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid Email", userRegistrationException.message);
+        }
     }
 
+    // User register Email-id in case null value
     @Test
-    public void givenEmailWhenItContainsDoubleDotsShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("xyz..yahoo.co.i");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenEmail_StartWithDotShouldReturnNullValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateEmailID(null);
+        } catch (NullPointerException nullPointerException) {
+            Assert.assertNotEquals("valid", nullPointerException.getMessage());
+        }
     }
 
-    @Test
-    public void givenEmailWhenItContainsSpecialCharacterShouldReturnFalse() {
 
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("xyz.yahoo.c@.i");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    // User Register Phone Number is valid
+    @Test
+    public void whenGivenPhoneNumber_Valid() throws UserRegistrationException {
+        UserRegistration validator = new UserRegistration();
+        String PhoneNo = validator.validatePhoneNumber("91 9919819801");
+        Assert.assertEquals("valid", PhoneNo);
     }
 
+    // User Register Phone Number is Invalid
     @Test
-    public void givenEmailWhenItContainsDigitsInTLDShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("xyz.yahoo.c1.i");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenMobileNo_WithoutCountryCodeShouldReturnInvalid() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validatePhoneNumber("91 9876544321");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid Phone", userRegistrationException.message);
+        }
     }
 
+    // User Register Phone Number in case of Empty
     @Test
-    public void givenEmailWhenAccordingToProperReqShouldReturnTrue() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.email("abc.xyz@bl.co.in");
-        String expectedRes = "Valid Email";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenMobileNo_WithoutSpaceShouldReturnEmptyValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validatePhoneNumber("");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter the Phone", userRegistrationException.message);
+        }
     }
 
+    // User Register Phone Number in case  Null Value
     @Test
-    public void givenMobileNumberWithSpaceAndProperNumberShouldReturnTrue() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.mobile("91 8123434456");
-        String expectedRes = "Valid Mobile Number";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenMobilNo_StartWithDotShouldReturnNullValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validatePhoneNumber(null);
+        } catch (NullPointerException nullPointerException) {
+            Assert.assertNotEquals("valid", nullPointerException.getMessage());
+        }
     }
 
-    @Test
-    public void givenMobileNumberWithoutSpaceAndProperNumberShouldReturnFalse() {
 
-        ReadData readData = new ReadData();
-        String actualResult = readData.mobile("918123434456");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    // User Register Password is valid
+    @Test
+    public void whenGivenPassword_Valid() throws UserRegistrationException {
+        UserRegistration validator = new UserRegistration();
+        String password = validator.validatePasswordWithRule("Abcd@123");
+        Assert.assertEquals("valid", password);
     }
 
+    // User Register Password is Invalid
     @Test
-    public void givenMobileNumberWithSpaceButNotProperCountryCodeShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.mobile("348123434456");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenPassword_WithoutIntegerCaseShouldReturnInvalid() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validatePasswordWithRule("dfjhs.srfshr3");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid password", userRegistrationException.message);
+        }
     }
 
+    // User register password in case of Empty value
     @Test
-    public void givenPasswordWithoutAnUpperCaseShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.password("abccc@123");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenPassword_WithoutSignShouldReturnEmptyValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validatePasswordWithRule("");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter Password", userRegistrationException.message);
+        }
     }
 
+    // User register password in case of Null value
     @Test
-    public void givenPasswordWithoutASpecialCharShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.password("abccc123");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
-    }
-
-    @Test
-    public void givenPasswordWithoutALowerCaseShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.password("AAAAAA@123A");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
-    }
-
-    @Test
-    public void givenPasswordWithoutMinNumOfCharShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.password("Ac@123");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
-    }
-    @Test
-    public void givenPasswordWithMultipleSpecCharShouldReturnFalse() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.password("abccc@@@123");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
-    }
-
-    @Test
-    public void givenPasswordWithProperRequirementsShouldReturnTrue() {
-
-        ReadData readData = new ReadData();
-        String actualResult = readData.password("Abccc@123");
-        String expectedRes = "Not Valid";
-        Assert.assertEquals(actualResult, expectedRes);
+    public void whenGivenPassword_StartWithDotShouldReturnNullValue() throws UserRegistrationException {
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validatePasswordWithRule(null);
+        } catch (NullPointerException nullPointerException) {
+            Assert.assertNotEquals("valid", nullPointerException.getMessage());
+        }
     }
 
 }
