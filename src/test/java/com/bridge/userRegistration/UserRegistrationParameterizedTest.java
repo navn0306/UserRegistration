@@ -36,7 +36,7 @@ public class UserRegistrationParameterizedTest {
     @Test
     public void givenEmailId_WithEmailId_ShouldPassedAllTest() throws UserRegistrationException {
         UserRegistration validator = new UserRegistration();
-        String actualResult = validator.validateEmailID(this.emailId);
+        String actualResult = validator.email(this.emailId);
         String expectedResult = "valid";
         Assert.assertEquals(expectedResult, actualResult);
     }

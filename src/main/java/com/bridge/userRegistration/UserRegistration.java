@@ -7,7 +7,7 @@ public class UserRegistration {
     public String VALIDATE_PHONE_NUMBER = "^[1-9]{2}( )[0-9]{10}$";
     public String VALIDATE_PASSWORD_WITH_RULE = "^([a-zA-Z0-9])?.{8,}$";
 
-    public String validateFirstName(String firstName) throws UserRegistrationException {
+    public String fName(String firstName) throws UserRegistrationException {
         try {
             if (firstName.length() == 0) {
                 throw new UserRegistrationException("Enter valid FName", UserRegistrationException.ExceptionType.EMPTY);
@@ -22,7 +22,7 @@ public class UserRegistration {
         }
     }
 
-    public String validateLastName(String lastName) throws UserRegistrationException {
+    public String lName(String lastName) throws UserRegistrationException {
         try {
             if (lastName.length() == 0) {
                 throw new UserRegistrationException("Enter lName", UserRegistrationException.ExceptionType.EMPTY);
@@ -37,7 +37,7 @@ public class UserRegistration {
         }
     }
 
-    public String validateEmailID(String Email) throws UserRegistrationException {
+    public String email(String Email) throws UserRegistrationException {
         try {
             if (Email.length() == 0) {
                 throw new UserRegistrationException("Enter valid Email", UserRegistrationException.ExceptionType.EMPTY);
@@ -52,9 +52,7 @@ public class UserRegistration {
         }
     }
 
-
-
-    public String validatePhoneNumber(String PhoneNo) throws UserRegistrationException {
+    public String number(String PhoneNo) throws UserRegistrationException {
         try {
             if (PhoneNo.length() == 0) {
                 throw new UserRegistrationException("Enter the Phone", UserRegistrationException.ExceptionType.EMPTY);
@@ -69,7 +67,7 @@ public class UserRegistration {
         }
     }
 
-    public String validatePasswordWithRule(String Password) throws UserRegistrationException {
+    public String password(String Password) throws UserRegistrationException {
         try {
             if (Password.length() == 0) {
                 throw new UserRegistrationException("Enter Password", UserRegistrationException.ExceptionType.EMPTY);
