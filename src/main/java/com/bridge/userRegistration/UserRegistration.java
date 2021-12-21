@@ -4,11 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserRegistration {
-    public String VALIDATE_FNAME = "^[A-Z]{1}[a-zA-z0-9]{2,}$";
-    public String VALIDATE_LNAME = "^[A-Z]{1}[a-zA-z0-9]{2,}$";
-    public String VALIDATE_EMAIL = "^[a-z0-9]{3,20}([_+.-][a-z0-9]+)?@[a-z0-9]+.[a-z]{2,3}(.[a-z]{2})?$";
-    public String VALIDATE_PHONE = "^[1-9]{2}( )[0-9]{10}$";
-    public String VALIDATE_PASSWORD = "^([a-zA-Z0-9])?.{8,}$";
+    public String VALIDATE_FNAME;
+    public String VALIDATE_LNAME;
+    public String VALIDATE_EMAIL;
+    public String VALIDATE_PHONE;
+    public String VALIDATE_PASSWORD;
 
     UserRegistrationInterface validateFname = (fName) -> {
         this.VALIDATE_FNAME = fName;
