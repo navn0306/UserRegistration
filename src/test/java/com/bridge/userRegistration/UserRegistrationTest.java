@@ -8,16 +8,19 @@ public class UserRegistrationTest {
 
     @Test
     public void whenGivenFirstNameShouldHaveMinimum3CharWithCamelCase() throws UserRegistrationException {
-        UserRegistration validator = new UserRegistration();
-        String firstName = validator.fName("Abc");
-        Assert.assertEquals("valid", firstName);
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateFname.validate("rahul");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid FName", userRegistrationException.message);
+        }
     }
 
     @Test
     public void whenGivenFirstNameWithInvalidFName() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.fName("bcdd");
+            validator.validateFname.validate("bcdd");
         } catch (UserRegistrationException userRegistrationException) {
             Assert.assertEquals("Enter valid FName", userRegistrationException.message);
         }
@@ -28,37 +31,40 @@ public class UserRegistrationTest {
     public void whenGivenFirstNameWithEmptyValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.fName(" ");
+            validator.validateFname.validate("");
         } catch (UserRegistrationException userRegistrationException) {
             Assert.assertEquals("Enter valid FName", userRegistrationException.message);
         }
     }
+
     @Test
     public void whenGivenFirstNameWithNullValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.fName(null);
+            validator.validateFname.validate(null);
         } catch (NullPointerException nullPointerException) {
             Assert.assertNotEquals("valid", nullPointerException.getMessage());
         }
     }
 
 
-    // User Register Last Name is valid
     @Test
     public void whenGivenLastNameShouldHaveMinimum3CharWithCamelCase() throws UserRegistrationException {
-        UserRegistration validator = new UserRegistration();
-        String lastName = validator.lName("Gautam");
-        Assert.assertEquals("valid", lastName);
+        try {
+            UserRegistration validator = new UserRegistration();
+            validator.validateLname.validate("Ga");
+        } catch (UserRegistrationException userRegistrationException) {
+            Assert.assertEquals("Enter valid lName", userRegistrationException.message);
+        }
     }
 
     @Test
     public void whenGivenLastNameWithSmallLetter() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.lName("Gautam");
+            validator.validateLname.validate("gautam");
         } catch (UserRegistrationException userRegistrationException) {
-            Assert.assertEquals("Enter a valid lName", userRegistrationException.message);
+            Assert.assertEquals("Enter valid lName", userRegistrationException.message);
         }
     }
 
@@ -66,9 +72,9 @@ public class UserRegistrationTest {
     public void whenGivenLastNameWithEmptyValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.lName("");
+            validator.validateLname.validate("");
         } catch (UserRegistrationException userRegistrationException) {
-            Assert.assertEquals("Enter lName", userRegistrationException.message);
+            Assert.assertEquals("Enter valid lName", userRegistrationException.message);
         }
     }
 
@@ -76,7 +82,7 @@ public class UserRegistrationTest {
     public void whenGivenLastNameWithNullValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.lName(null);
+            validator.validateFname.validate(null);
         } catch (NullPointerException nullPointerException) {
             Assert.assertNotEquals("valid", nullPointerException.getMessage());
         }
@@ -85,17 +91,17 @@ public class UserRegistrationTest {
     @Test
     public void whenGivenEmailValid() throws UserRegistrationException {
         UserRegistration validator = new UserRegistration();
-        String Email = validator.email("abc.xyz@blz.com");
-        Assert.assertEquals("valid", Email);
+        validator.validateEmail.validate("abc.xyz@blz.com");
+        Assert.assertEquals("valid", "valid");
     }
 
     @Test
     public void whenGivenEmailWithoutSignShouldReturnInvalid() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.email("abc.xyz.bl.co.in");
+            validator.validateEmail.validate("abc.xyz.bl.co.in");
         } catch (UserRegistrationException userRegistrationException) {
-            Assert.assertEquals("Enter valid Email", userRegistrationException.message);
+            Assert.assertEquals("Enter valid email", userRegistrationException.message);
         }
     }
 
@@ -103,9 +109,9 @@ public class UserRegistrationTest {
     public void whenGivenEmailWithoutSignShouldReturnEmptyValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.email("");
+            validator.validateEmail.validate("");
         } catch (UserRegistrationException userRegistrationException) {
-            Assert.assertEquals("Enter valid Email", userRegistrationException.message);
+            Assert.assertEquals("Enter valid email", userRegistrationException.message);
         }
     }
 
@@ -113,7 +119,7 @@ public class UserRegistrationTest {
     public void whenGivenEmailStartWithDotShouldReturnNullValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.email(null);
+            validator.validateEmail.validate(null);
         } catch (NullPointerException nullPointerException) {
             Assert.assertNotEquals("valid", nullPointerException.getMessage());
         }
@@ -122,15 +128,15 @@ public class UserRegistrationTest {
     @Test
     public void whenGivenPhoneNumberValid() throws UserRegistrationException {
         UserRegistration validator = new UserRegistration();
-        String PhoneNo = validator.number("91 9066297227");
-        Assert.assertEquals("valid", PhoneNo);
+        validator.validatePhone.validate("91 9066297227");
+        Assert.assertEquals("valid", "valid");
     }
 
     @Test
     public void whenGivenMobileNoWithoutCountryCodeShouldReturnInvalid() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.number("91 9876544321");
+            validator.validatePhone.validate("91 9876544321");
         } catch (UserRegistrationException userRegistrationException) {
             Assert.assertEquals("Enter valid Phone", userRegistrationException.message);
         }
@@ -140,9 +146,9 @@ public class UserRegistrationTest {
     public void whenGivenMobileNoWithoutSpaceShouldReturnEmptyValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.number("");
+            validator.validatePhone.validate("");
         } catch (UserRegistrationException userRegistrationException) {
-            Assert.assertEquals("Enter the Phone", userRegistrationException.message);
+            Assert.assertEquals("Enter valid Phone", userRegistrationException.message);
         }
     }
 
@@ -150,7 +156,7 @@ public class UserRegistrationTest {
     public void whenGivenMobilNoStartWithDotShouldReturnNullValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.number(null);
+            validator.validatePhone.validate(null);
         } catch (NullPointerException nullPointerException) {
             Assert.assertNotEquals("valid", nullPointerException.getMessage());
         }
@@ -159,15 +165,15 @@ public class UserRegistrationTest {
     @Test
     public void whenGivenPasswordValid() throws UserRegistrationException {
         UserRegistration validator = new UserRegistration();
-        String password = validator.password("Abcd@123");
-        Assert.assertEquals("valid", password);
+        validator.validatePassword.validate("Abcd@123");
+        Assert.assertEquals("valid", "valid");
     }
 
     @Test
     public void whenGivenPasswordWithoutIntegerCaseShouldReturnInvalid() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.password("nckdf.fdike3");
+            validator.validatePassword.validate("nckdf.fdike3");
         } catch (UserRegistrationException userRegistrationException) {
             Assert.assertEquals("Enter valid password", userRegistrationException.message);
         }
@@ -177,9 +183,9 @@ public class UserRegistrationTest {
     public void whenGivenPasswordWithoutSignShouldReturnEmptyValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.password("");
+            validator.validatePassword.validate("nc");
         } catch (UserRegistrationException userRegistrationException) {
-            Assert.assertEquals("Enter Password", userRegistrationException.message);
+            Assert.assertEquals("Enter valid Password", userRegistrationException.message);
         }
     }
 
@@ -187,7 +193,7 @@ public class UserRegistrationTest {
     public void whenGivenPasswordStartWithDotShouldReturnNullValue() throws UserRegistrationException {
         try {
             UserRegistration validator = new UserRegistration();
-            validator.password(null);
+            validator.validatePassword.validate(null);
         } catch (NullPointerException nullPointerException) {
             Assert.assertNotEquals("valid", nullPointerException.getMessage());
         }

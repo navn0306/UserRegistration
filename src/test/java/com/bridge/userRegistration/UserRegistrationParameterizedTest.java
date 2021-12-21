@@ -1,11 +1,9 @@
 package com.bridge.userRegistration;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -21,23 +19,16 @@ public class UserRegistrationParameterizedTest {
 
     @Parameterized.Parameters
     public static Collection ExpectedResult() {
-        return Arrays.asList(new Object[][]{
-                {"abc.xyz@blz.com.in", true},
-                {"abc.xyz@blzin.com", true},
-                {"abc@blz.com", true},
-                {"abc@xyz@gmail.com", false},
+        return Arrays.asList(new Object[][]{{"abc.xyz@blz.com.in", true}, {"abc.xyz@blzin.com", true}, {"abc@blz.com", true},
                 {"abc@gmail.com", true},
-                {"abc", false},
-                {"abc@blz", false},
-
         });
     }
 
     @Test
     public void givenEmailId_WithEmailId_ShouldPassedAllTest() throws UserRegistrationException {
         UserRegistration validator = new UserRegistration();
-        String actualResult = validator.email(this.emailId);
+        validator.validateFname.validate(this.emailId);
         String expectedResult = "valid";
-        Assert.assertEquals(expectedResult, actualResult);
+        Assert.assertEquals(expectedResult, true);
     }
 }
